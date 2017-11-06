@@ -1,14 +1,14 @@
 CC = g++
-PYTHON_VERSION = 2.7
+PYTHON_VERSION = 3.5
 PYTHON_INCLUDE = /usr/include/python$(PYTHON_VERSION)
 CXXFLAGS = -O3 -fopenmp -g -fPIC -std=c++11 -I$(PYTHON_INCLUDE) -I..
 LDFLAGS = -L../bin -L..
-LDLIBS = -lkgraph -lboost_python -lboost_timer -lboost_chrono -lpython$(PYTHON_VERSION) -lgomp
+LDLIBS = -lkgraph -lboost_python -lboost_timer -lboost_chrono -lpython$(PYTHON_VERSION) -lgomp -fPIC
 
 #ifeq (${BLAS}, false)
 #else
-#	CXXFLAGS += -DUSE_BLAS=1
-#	LDLIBS += /usr/lib/openblas-base/libblas.a
+CXXFLAGS += -DUSE_BLAS=1
+LDLIBS += /usr/lib/openblas-base/libblas.a
 #endif
 
 PYTHON_DIR = /usr/local/lib/python$(PYTHON_VERSION)/dist-packages/

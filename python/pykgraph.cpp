@@ -451,9 +451,20 @@ public:
     }
 };
 
+#if PY_VERSION_HEX >= 0x03000000
+void *
+#else
+void
+#endif
+initialize()
+{
+  import_array();
+}
+
 BOOST_PYTHON_MODULE(pykgraph)
 {
-    import_array();
+    //import_array();
+    initialize();
     python::numeric::array::set_module_and_type("numpy", "ndarray");
     python::class_<KGraph>("KGraph", python::init<PyObject *, string>())
         .def(python::init<>())
